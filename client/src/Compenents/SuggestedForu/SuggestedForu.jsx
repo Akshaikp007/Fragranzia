@@ -124,21 +124,28 @@ const SuggestedForu = () => {
                         className="flex-shrink-0 w-[280px] lg:w-[320px] xl:w-[340px] snap-start group flex flex-col h-full"
                     >
 
-                        {/* Image Wrapper adjusted to comfortable 340px width-scale proportions with 2px thick border */}
-                        <div className="relative w-full h-[320px] lg:h-[360px] xl:h-[380px] bg-white border-[2px] border-gray-100 shadow-[0_10px_35px_rgba(0,0,0,0.25)] rounded-tl-[100px] rounded-br-[100px] rounded-tr-[5px] rounded-bl-[5px] group-hover:rounded-tl-[5px] group-hover:rounded-br-[5px] group-hover:rounded-tr-[100px] group-hover:rounded-bl-[100px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-6 pointer-events-none">
-                            <img
-                                src={product.img}
-                                alt={product.title}
-                                className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)] group-hover:scale-[1.05] transition-transform duration-500"
-                            />
-                        </div>
+                        {/* Clickable Wrapper for Image and Title */}
+                        <div 
+                            onClick={() => navigate(`/products/${product.id}`)}
+                            className="cursor-pointer"
+                        >
+                            {/* Image Wrapper */}
+                            <div className="relative w-full h-[320px] lg:h-[360px] xl:h-[380px] bg-white border-[2px] border-gray-100 shadow-[0_10px_35px_rgba(0,0,0,0.25)] rounded-tl-[100px] rounded-br-[100px] rounded-tr-[5px] rounded-bl-[5px] group-hover:rounded-tl-[5px] group-hover:rounded-br-[5px] group-hover:rounded-tr-[100px] group-hover:rounded-bl-[100px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-6">
+                                <img
+                                    src={product.img}
+                                    alt={product.title}
+                                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)] group-hover:scale-[1.05] transition-transform duration-500"
+                                />
+                            </div>
 
-                        {/* Product Info proportionally balanced */}
-                        <div className="flex flex-col flex-grow w-full px-0.5">
-                            <h3 className="text-[16px] lg:text-[18px] font-semibold text-[#111] leading-[1.3] mb-2 line-clamp-2 min-h-[46px] lg:min-h-[50px]">
+                            {/* Product Info Title */}
+                            <h3 className="text-[16px] lg:text-[18px] font-semibold text-[#111] leading-[1.3] mb-2 line-clamp-2 min-h-[46px] lg:min-h-[50px] hover:text-[#063344] transition-colors">
                                 {product.title}
                             </h3>
+                        </div>
 
+                        {/* Price & Add to Cart */}
+                        <div className="flex flex-col flex-grow w-full px-0.5">
                             <div className="flex items-center space-x-3 mt-1 mb-6">
                                 <span className="text-[19px] lg:text-[23px] font-[800] text-black tracking-tight">
                                     RS {product.price}
@@ -153,7 +160,7 @@ const SuggestedForu = () => {
                             {/* Standardized CTA button pad */}
                             <button 
                                 onClick={() => handleAddToCart(product)}
-                                className="w-full bg-[#063344] text-white font-medium text-[15px] lg:text-[16px] py-[13px] lg:py-[15px] rounded-[5px] hover:bg-[#042431] transition-all tracking-wide mt-auto"
+                                className="w-full bg-[#063344] text-white font-medium text-[15px] lg:text-[16px] py-[13px] lg:py-[15px] rounded-[5px] hover:bg-[#042431] transition-all tracking-wide mt-auto cursor-pointer"
                             >
                                 Add to Cart
                             </button>

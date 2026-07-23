@@ -141,22 +141,29 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
                         key={product.id}
                         className="flex-shrink-0 w-[290px] lg:w-[340px] snap-start group cursor-default flex flex-col h-full"
                     >
-                        {/* Leaf Shape Image Card */}
-                        <div className="relative w-full h-[320px] lg:h-[385px] bg-white border border-gray-100 shadow-[0_8px_28px_rgba(0,0,0,0.09)] rounded-tl-[120px] rounded-br-[120px] rounded-tr-[24px] rounded-bl-[24px] group-hover:rounded-tl-[24px] group-hover:rounded-br-[24px] group-hover:rounded-tr-[120px] group-hover:rounded-bl-[120px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-5">
-                            {showBadge && <NewBadge />}
-                            <img
-                                src={product.img}
-                                alt={product.title}
-                                className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-105"
-                            />
-                        </div>
+                        {/* Clickable Wrapper for Image and Title */}
+                        <div 
+                            onClick={() => navigate(`/products/${product.id}`)}
+                            className="cursor-pointer"
+                        >
+                            {/* Leaf Shape Image Card */}
+                            <div className="relative w-full h-[320px] lg:h-[385px] bg-white border border-gray-100 shadow-[0_8px_28px_rgba(0,0,0,0.09)] rounded-tl-[120px] rounded-br-[120px] rounded-tr-[24px] rounded-bl-[24px] group-hover:rounded-tl-[24px] group-hover:rounded-br-[24px] group-hover:rounded-tr-[120px] group-hover:rounded-bl-[120px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-5">
+                                {showBadge && <NewBadge />}
+                                <img
+                                    src={product.img}
+                                    alt={product.title}
+                                    className="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-105"
+                                />
+                            </div>
 
-                        {/* Product Info */}
-                        <div className="flex flex-col flex-grow">
-                            <h3 className="text-[16px] font-bold text-[#111] leading-snug mb-2 min-h-[42px] line-clamp-2">
+                            {/* Product Info Title */}
+                            <h3 className="text-[16px] font-bold text-[#111] leading-snug mb-2 min-h-[42px] line-clamp-2 hover:text-[#0a3b4c] transition-colors">
                                 {product.title}
                             </h3>
+                        </div>
 
+                        {/* Price & Add to Cart */}
+                        <div className="flex flex-col flex-grow">
                             <div className="flex items-center space-x-3 mt-1 mb-4">
                                 <span className="text-[20px] font-[800] text-[#111] tracking-tight">
                                     RS {product.price}
@@ -170,7 +177,7 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
 
                             <button 
                                 onClick={() => handleAddToCart(product)}
-                                className="w-full bg-[#0a3b4c] text-white font-semibold text-[15px] py-[13px] rounded-[5px] hover:bg-[#063344] active:scale-[0.98] transition-all mt-auto"
+                                className="w-full bg-[#0a3b4c] text-white font-semibold text-[15px] py-[13px] rounded-[5px] hover:bg-[#063344] active:scale-[0.98] transition-all mt-auto cursor-pointer"
                             >
                                 Add to Cart
                             </button>
