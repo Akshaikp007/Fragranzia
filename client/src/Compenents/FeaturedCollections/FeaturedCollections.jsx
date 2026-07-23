@@ -79,13 +79,15 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
     };
 
     const NewBadge = () => (
-        <div className="absolute top-3 left-3 z-10 w-[105px] h-[105px]">
+        <div className="absolute top-1 left-1 z-10 w-[115px] h-[115px] flex items-center justify-center -rotate-[15deg] transition-transform duration-500 group-hover:scale-105">
             <img
                 src={newBadgeImg}
                 alt="New"
-                className="w-full h-full object-contain"
-                style={{ mixBlendMode: 'multiply' }}
+                className="w-full h-full object-contain absolute inset-0"
             />
+            <span className="relative z-10 font-[Poppins] font-semibold text-white text-[16px] tracking-wide select-none translate-y-[-2px]">
+                New
+            </span>
         </div>
     );
 
@@ -140,7 +142,7 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
                         className="flex-shrink-0 w-[260px] lg:w-[300px] snap-start group cursor-default flex flex-col h-full"
                     >
                         {/* Leaf Shape Image Card */}
-                        <div className="relative w-full h-[300px] lg:h-[340px] bg-white border border-gray-100 shadow-[0_8px_28px_rgba(0,0,0,0.09)] rounded-tl-[80px] rounded-br-[80px] rounded-tr-[16px] rounded-bl-[16px] group-hover:rounded-tl-[16px] group-hover:rounded-br-[16px] group-hover:rounded-tr-[80px] group-hover:rounded-bl-[80px] transition-all duration-500 ease-in-out flex items-center justify-center p-6 mb-5">
+                        <div className="relative w-full h-[320px] lg:h-[385px] bg-white border border-gray-100 shadow-[0_8px_28px_rgba(0,0,0,0.09)] rounded-tl-[120px] rounded-br-[120px] rounded-tr-[24px] rounded-bl-[24px] group-hover:rounded-tl-[24px] group-hover:rounded-br-[24px] group-hover:rounded-tr-[120px] group-hover:rounded-bl-[120px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-5">
                             {showBadge && <NewBadge />}
                             <img
                                 src={product.img}

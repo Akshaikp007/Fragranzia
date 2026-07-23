@@ -94,10 +94,9 @@ const Home = () => {
               <img
                 src={newBadgeImg}
                 alt="Shop Now"
-                className="w-full h-full object-contain"
-                style={{ mixBlendMode: 'multiply' }}
+                className="w-full h-full object-contain absolute inset-0"
               />
-              <span className="absolute font-bold text-white text-[13px] lg:text-[18px] leading-[1.2] text-center -rotate-[15deg] drop-shadow">
+              <span className="relative z-10 font-[Poppins] font-extrabold text-white text-[13px] lg:text-[18px] leading-[1.2] text-center -rotate-[12deg] drop-shadow select-none translate-y-[-2px]">
                 Shop<br />Now
               </span>
             </div>
