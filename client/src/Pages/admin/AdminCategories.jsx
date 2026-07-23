@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import { FiSearch, FiPlus, FiDownload, FiUpload, FiX } from 'react-icons/fi';
+import { FiSearch, FiPlus, FiDownload, FiUpload, FiX, FiEdit, FiTrash2 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
 const AdminCategories = () => {
@@ -15,6 +15,8 @@ const AdminCategories = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [parentCategory, setParentCategory] = useState('None');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editCategoryId, setEditCategoryId] = useState(null);
 
   const fetchCategories = async () => {
     try {
@@ -31,27 +33,60 @@ const AdminCategories = () => {
     fetchCategories();
   }, []);
 
-  const handleAddCategory = async () => {
+  const handleSaveCategory = async () => {
     if (!name.trim()) {
       toast.error('Category name is required');
       return;
     }
 
     try {
-      const { data } = await axiosPrivate.post('/api/categories', {
-        name,
-        description,
-        parentCategory
-      });
+      if (isEditing) {
+        await axiosPrivate.put(`/api/categories/${editCategoryId}`, {
+          name,
+          description,
+          parentCategory
+        });
+        toast.success('Category updated successfully');
+      } else {
+        await axiosPrivate.post('/api/categories', {
+          name,
+          description,
+          parentCategory
+        });
+        toast.success('Category added successfully');
+      }
 
       // Reset form and refresh table
       setName('');
       setDescription('');
       setParentCategory('None');
+      setIsEditing(false);
+      setEditCategoryId(null);
       setIsDrawerOpen(false);
       fetchCategories();
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.response?.data?.message || err.message);
+    }
+  };
+
+  const handleEditClick = (category) => {
+    setIsEditing(true);
+    setEditCategoryId(category._id);
+    setName(category.name);
+    setDescription(category.description || '');
+    setParentCategory(category.parentCategory || 'None');
+    setIsDrawerOpen(true);
+  };
+
+  const handleDeleteCategory = async (id) => {
+    if (window.confirm('Are you sure you want to delete this category?')) {
+      try {
+        await axiosPrivate.delete(`/api/categories/${id}`);
+        toast.success('Category deleted successfully');
+        fetchCategories();
+      } catch (err) {
+        toast.error(err.response?.data?.message || err.message);
+      }
     }
   };
 
@@ -80,7 +115,14 @@ const AdminCategories = () => {
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
         </div>
         <button 
-          onClick={() => setIsDrawerOpen(true)}
+          onClick={() => {
+            setIsEditing(false);
+            setEditCategoryId(null);
+            setName('');
+            setDescription('');
+            setParentCategory('None');
+            setIsDrawerOpen(true);
+          }}
           className="ml-4 flex-shrink-0 flex items-center gap-2 px-5 py-2.5 bg-[#0e9f6e] hover:bg-[#0c8a5e] text-white rounded-md transition-colors shadow-sm text-sm font-medium"
         >
           <FiPlus className="w-4 h-4" /> Add Category
@@ -96,18 +138,19 @@ const AdminCategories = () => {
                 <th className="px-6 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
                 <th className="px-6 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Description</th>
                 <th className="px-6 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Parent Category</th>
+                <th className="px-6 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan="3" className="px-6 py-8 text-center text-gray-500">
+                  <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
                     Loading categories...
                   </td>
                 </tr>
               ) : categories.length === 0 ? (
                 <tr>
-                  <td colSpan="3" className="px-6 py-8 text-center text-gray-500">
+                  <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
                     No categories found. Click "Add Category" to create one.
                   </td>
                 </tr>
@@ -117,6 +160,24 @@ const AdminCategories = () => {
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">{cat.name}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">{cat.description}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">{cat.parentCategory}</td>
+                    <td className="px-6 py-4 text-sm text-right">
+                      <div className="flex justify-end gap-2">
+                        <button 
+                          onClick={() => handleEditClick(cat)}
+                          className="p-1.5 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition-colors"
+                          title="Edit Category"
+                        >
+                          <FiEdit className="w-4 h-4" />
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteCategory(cat._id)}
+                          className="p-1.5 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition-colors"
+                          title="Delete Category"
+                        >
+                          <FiTrash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))
               )}
@@ -147,7 +208,7 @@ const AdminCategories = () => {
         } flex flex-col`}
       >
         <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gray-50/50">
-          <h2 className="text-lg font-bold text-gray-800">Add Category</h2>
+          <h2 className="text-lg font-bold text-gray-800">{isEditing ? 'Edit Category' : 'Add Category'}</h2>
           <button 
             onClick={() => setIsDrawerOpen(false)}
             className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
@@ -205,10 +266,10 @@ const AdminCategories = () => {
             Cancel
           </button>
           <button 
-            onClick={handleAddCategory}
+            onClick={handleSaveCategory}
             className="flex-1 py-2.5 bg-[#0e9f6e] hover:bg-[#0c8a5e] text-white rounded-md font-medium transition-colors shadow-sm text-sm"
           >
-            Add Category
+            {isEditing ? 'Update Category' : 'Add Category'}
           </button>
         </div>
       </div>
