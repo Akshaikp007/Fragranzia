@@ -73,6 +73,21 @@ function Productsinglepage() {
         }
     };
 
+    const handlePurchaseNow = async () => {
+        const cartProduct = { ...product, discount: `${discount}% off` };
+        if (!auth?.accessToken) {
+            sessionStorage.setItem('pendingCartItem', JSON.stringify({ product: cartProduct, quantity }));
+            navigate('/login', { state: { from: { pathname: '/payment' } } });
+            return;
+        }
+        try {
+            await addToCart(cartProduct, quantity);
+            navigate('/payment');
+        } catch (error) {
+            // Handled
+        }
+    };
+
     return (
         <div className="font-sans min-h-screen bg-white text-[#111]">
             <Navbar />
@@ -131,8 +146,9 @@ function Productsinglepage() {
                         {/* CTA Buttons - Hug perfectly with the Left column width */}
                         <div className="flex flex-col gap-3.5 w-full">
                             <button 
+                                onClick={handlePurchaseNow}
                                 disabled={product.quantity <= 0}
-                                className="w-full bg-[#063344] text-white font-bold text-[16px] xl:text-[18px] py-[16px] rounded-[4px] hover:bg-[#042431] transition-colors tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full bg-[#063344] text-white font-bold text-[16px] xl:text-[18px] py-[16px] rounded-[4px] hover:bg-[#042431] transition-colors tracking-wide disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                             >
                                 {product.quantity <= 0 ? "Out of Stock" : "Purchase Now"}
                             </button>
