@@ -6,6 +6,7 @@ import { FiHome, FiBriefcase, FiUser, FiMapPin, FiTrash2, FiCheckCircle, FiClock
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { getImageUrl } from '../../axios';
 
 const Profile = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -557,7 +558,7 @@ const Profile = () => {
                         <div className="w-24 h-24 rounded-lg bg-gray-50 border border-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
                           {product?.images?.[0] ? (
                             <img 
-                              src={`http://localhost:5000/uploads/${product.images[0]}`} 
+                              src={getImageUrl(product.images[0])} 
                               alt={product.name} 
                               className="w-full h-full object-contain max-h-[80px]"
                             />
@@ -852,7 +853,7 @@ const Profile = () => {
               <div className="w-12 h-12 bg-white rounded border border-gray-100 flex items-center justify-center flex-shrink-0">
                 {selectedOrderToReturn.orderItems?.product?.images?.[0] ? (
                   <img 
-                    src={`http://localhost:5000/uploads/${selectedOrderToReturn.orderItems.product.images[0]}`} 
+                    src={getImageUrl(selectedOrderToReturn.orderItems.product.images[0])} 
                     alt={selectedOrderToReturn.orderItems.product.name} 
                     className="w-full h-full object-contain max-h-[40px]"
                   />

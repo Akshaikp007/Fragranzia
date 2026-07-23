@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import useAxiosPrivate from './hooks/useAxiosPrivate';
 import toast from 'react-hot-toast';
+import { getImageUrl } from './axios';
 
 const CartContext = createContext();
 
@@ -22,7 +23,7 @@ const mapServerCartToClient = (serverCart) => {
       price,
       originalPrice,
       discount,
-      image: p.images?.[0] ? `http://localhost:5000/uploads/${p.images[0]}` : "https://via.placeholder.com/150",
+      image: getImageUrl(p.images?.[0]),
       quantity: item.quantity
     };
   }).filter(Boolean);

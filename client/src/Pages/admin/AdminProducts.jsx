@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import UserService from '../../services/UserService';
+import { getImageUrl } from '../../axios';
 
 
 const AdminProducts = () => {
@@ -208,7 +209,7 @@ const AdminProducts = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded bg-gray-100 flex-shrink-0 flex items-center justify-center text-xs text-gray-400">
                           {product.images && product.images.length > 0 ? (
-                            <img src={`http://localhost:5000/uploads/${product.images[0]}`} alt={product.name} className="w-full h-full object-cover rounded" />
+                            <img src={getImageUrl(product.images[0])} alt={product.name} className="w-full h-full object-cover rounded" />
                           ) : (
                             'Img'
                           )}

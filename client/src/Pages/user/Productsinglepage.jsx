@@ -10,6 +10,7 @@ import { useCart } from '../../CartContext';
 import { useWishlist } from '../../WishlistContext';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { getImageUrl } from '../../axios';
 
 
 function Productsinglepage() {
@@ -35,9 +36,9 @@ function Productsinglepage() {
                     price: hasSalePrice ? p.salePrice : p.price,
                     originalPrice: hasSalePrice ? p.price : null,
                     image: p.images?.[0]
-                        ? `http://localhost:5000/uploads/${p.images[0]}`
+                        ? getImageUrl(p.images[0])
                         : "https://via.placeholder.com/500?text=Fragranzia+Perfume",
-                    images: p.images ? p.images.map(img => `http://localhost:5000/uploads/${img}`) : [],
+                    images: p.images ? p.images.map(img => getImageUrl(img)) : [],
                     description: p.description,
                     quantity: p.quantity !== undefined ? p.quantity : 0
                 });

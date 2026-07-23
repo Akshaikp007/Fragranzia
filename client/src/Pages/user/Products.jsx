@@ -6,7 +6,7 @@ import Navbar from '../../Compenents/Navbar/Navbar';
 import Footer from '../../Compenents/Footer/Footer';
 import ProductCard from '../../Compenents/ProductCard/ProductCard';
 import PromoBanner from '../../Compenents/PromoBanner/PromoBanner';
-import { BASE_URL } from "../../axios";
+import { BASE_URL, getImageUrl } from "../../axios";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,7 +51,7 @@ const Products = () => {
             originalPrice: hasSalePrice ? product.price : null,
             badge: "New",
             img: product.images?.[0]
-              ? `${BASE_URL}/uploads/${product.images[0]}`
+              ? getImageUrl(product.images[0])
               : "https://via.placeholder.com/500?text=Fragranzia+Perfume",
             categoryName: product.category?.name || "Uncategorized",
             categoryId: product.category?._id || "",

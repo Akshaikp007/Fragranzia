@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCart } from "../../CartContext";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { getImageUrl } from "../../axios";
 
 const SuggestedForu = () => {
     const scrollRef = useRef(null);
@@ -53,7 +54,7 @@ const SuggestedForu = () => {
                         price: hasSalePrice ? product.salePrice : product.price,
                         originalPrice: hasSalePrice ? product.price : null,
                         img: product.images?.[0]
-                            ? `http://localhost:5000/uploads/${product.images[0]}`
+                            ? getImageUrl(product.images[0])
                             : "https://via.placeholder.com/500?text=Fragranzia+Perfume",
                     };
                 });

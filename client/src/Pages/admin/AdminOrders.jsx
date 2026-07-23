@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { FiSearch, FiShoppingCart, FiCalendar, FiDollarSign } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { getImageUrl } from '../../axios';
 
 const AdminOrders = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -182,7 +183,7 @@ const AdminOrders = () => {
                           <div className="w-10 h-10 rounded border border-gray-100 bg-gray-50 flex items-center justify-center flex-shrink-0">
                             {product?.images?.[0] ? (
                               <img 
-                                src={`http://localhost:5000/uploads/${product.images[0]}`} 
+                                src={getImageUrl(product.images[0])} 
                                 alt={product.name} 
                                 className="w-full h-full object-contain max-h-[36px]"
                               />
@@ -320,7 +321,7 @@ const AdminOrders = () => {
                     <div className="w-12 h-12 bg-white border border-gray-100 rounded flex items-center justify-center flex-shrink-0">
                       {selectedOrderDetails.orderItems?.product?.images?.[0] ? (
                         <img 
-                          src={`http://localhost:5000/uploads/${selectedOrderDetails.orderItems.product.images[0]}`} 
+                          src={getImageUrl(selectedOrderDetails.orderItems.product.images[0])} 
                           alt={selectedOrderDetails.orderItems.product.name} 
                           className="w-full h-full object-contain max-h-[40px]"
                         />

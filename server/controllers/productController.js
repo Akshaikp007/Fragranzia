@@ -21,6 +21,8 @@ const addProduct = async (req, res) => {
       });
     }
 
+    const imagePath = req.file ? (req.file.path.startsWith('http') ? req.file.path : req.file.filename) : null;
+
     const product = new Product({
       name,
       price,
@@ -32,7 +34,7 @@ const addProduct = async (req, res) => {
       description,
       hasVariants,
 
-      images: req.file ? [req.file.filename] : []
+      images: imagePath ? [imagePath] : []
     });
 
     const createdProduct = await product.save();
@@ -180,7 +182,8 @@ const updateProduct = async (req, res) => {
     }
 
     if (req.file) {
-      product.images = [req.file.filename];
+      const imagePath = req.file.path.startsWith('http') ? req.file.path : req.file.filename;
+      product.images = [imagePath];
     }
 
     const updatedProduct = await product.save();

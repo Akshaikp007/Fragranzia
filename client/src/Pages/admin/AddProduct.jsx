@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import UserService from '../../services/UserService';
+import { getImageUrl } from '../../axios';
 
 const AddProduct = () => {
   const location = useLocation();
@@ -259,7 +260,7 @@ const AddProduct = () => {
               </div>
             ) : editProduct && editProduct.images && editProduct.images.length > 0 ? (
               <div className="flex items-center gap-3">
-                <img src={`http://localhost:5000/uploads/${editProduct.images[0]}`} alt={editProduct.name} className="w-16 h-16 object-cover rounded-lg shadow-sm border border-gray-100" />
+                <img src={getImageUrl(editProduct.images[0])} alt={editProduct.name} className="w-16 h-16 object-cover rounded-lg shadow-sm border border-gray-100" />
                 <div className="flex flex-col items-start gap-1 text-left">
                   <span className="text-xs text-gray-500 font-medium truncate max-w-xs">{editProduct.images[0]}</span>
                   <span className="text-xs text-[#0e9f6e] font-semibold">Current image. Click to change.</span>
