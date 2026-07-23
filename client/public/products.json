@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Autograph Eau De Parfum 100ml For Men",
+    "image": "/src/assets/yellowglass.png",
+    "price": 650,
+    "originalPrice": 1400,
+    "isNew": true
+  },
+  {
+    "id": 2,
+    "title": "Kyros Eau De Parfum 100ml For Men",
+    "image": "/src/assets/blackglass.png",
+    "price": 899,
+    "originalPrice": 2000,
+    "isNew": true
+  },
+  {
+    "id": 3,
+    "title": "Autograph Eau De Parfum 100ml For Men",
+    "image": "/src/assets/pinkglass.png",
+    "price": 999,
+    "originalPrice": 2241,
+    "isNew": true
+  },
+  {
+    "id": 4,
+    "title": "Royal Eau De Parfum 100ml For Men",
+    "image": "/src/assets/yellowglass.png",
+    "price": 650,
+    "originalPrice": 1200,
+    "isNew": true
+  }
+]
