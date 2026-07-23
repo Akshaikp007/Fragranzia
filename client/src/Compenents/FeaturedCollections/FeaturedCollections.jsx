@@ -139,7 +139,7 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
                 {products.map((product) => (
                     <div
                         key={product.id}
-                        className="flex-shrink-0 w-[260px] lg:w-[300px] snap-start group cursor-default flex flex-col h-full"
+                        className="flex-shrink-0 w-[290px] lg:w-[340px] snap-start group cursor-default flex flex-col h-full"
                     >
                         {/* Leaf Shape Image Card */}
                         <div className="relative w-full h-[320px] lg:h-[385px] bg-white border border-gray-100 shadow-[0_8px_28px_rgba(0,0,0,0.09)] rounded-tl-[120px] rounded-br-[120px] rounded-tr-[24px] rounded-bl-[24px] group-hover:rounded-tl-[24px] group-hover:rounded-br-[24px] group-hover:rounded-tr-[120px] group-hover:rounded-bl-[120px] transition-all duration-500 ease-in-out flex items-center justify-center p-8 mb-5">
