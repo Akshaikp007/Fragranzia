@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiBell, FiUser, FiMenu } from 'react-icons/fi';
+import { FiUser, FiMenu } from 'react-icons/fi';
 
 const AdminNavBar = ({ onMenuClick }) => {
   return (
@@ -15,14 +15,6 @@ const AdminNavBar = ({ onMenuClick }) => {
       </div>
       
       <div className="flex items-center gap-6">
-        {/* Notification Bell */}
-        <button className="relative p-2 text-gray-500 hover:text-gray-700 transition-colors">
-          <FiBell className="w-6 h-6" />
-          <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
-            3
-          </span>
-        </button>
-
         {/* User Profile */}
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
