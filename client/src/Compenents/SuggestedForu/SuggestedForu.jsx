@@ -4,7 +4,7 @@ import axios from "axios";
 import { useCart } from "../../CartContext";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { getImageUrl } from "../../axios";
+import { getImageUrl, BASE_URL } from "../../axios";
 
 const SuggestedForu = () => {
     const scrollRef = useRef(null);
@@ -44,7 +44,7 @@ const SuggestedForu = () => {
         const fetchProducts = async () => {
             try {
                 // Fetching exactly 8 products to act as suggested items
-                const { data } = await axios.get("http://localhost:5000/api/products");
+                const { data } = await axios.get(`${BASE_URL}/api/products`);
 
                 const formattedProducts = data.map((product) => {
                     const hasSalePrice = product.salePrice && product.salePrice > 0;

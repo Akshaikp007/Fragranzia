@@ -5,7 +5,7 @@ import { useCart } from '../../CartContext';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { getImageUrl } from '../../axios';
+import { getImageUrl, BASE_URL } from '../../axios';
 
 const FeaturedCollections = ({ titleNode, showBadge = true }) => {
     const [products, setProducts] = useState([]);
@@ -44,7 +44,7 @@ const FeaturedCollections = ({ titleNode, showBadge = true }) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const { data } = await axios.get("http://localhost:5000/api/products");
+                const { data } = await axios.get(`${BASE_URL}/api/products`);
 
                 const formattedProducts = data.map((product) => {
                     const hasSalePrice = product.salePrice && product.salePrice > 0;
