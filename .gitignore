@@ -5,4 +5,8 @@ node_modules/
 *.log
 dist/
 vercel-*.txt
-
+github_profile_readme.md
+snake_workflow.yml
+tagline.svg
+assets/banner.png
+server/syncToAtlas.js
